@@ -15,12 +15,12 @@ const Graph = ({ graphData }) => {
 	const usersPerDay = graphData?.map((url) => url.count);
 
 	const data = {
-		labels: graphData.length > 0 ? labels : ["", "", "", ""],
+		labels: graphData?.length > 0 ? labels : ["", "", "", "", "", "", "", "", ""],
 		datasets: [
 			{
 				label: "Total Click",
-				data: graphData.length > 0 ? usersPerDay : [1, 2, 3, 4, 5],
-				backgroundColor: graphData.length > 0 ? "#3b62f6" : "rgba(54,162,235,0.1)",
+				data: graphData?.length > 0 ? usersPerDay : [1, 2, 4, 3, 5, 3, 4, 2, 1],
+				backgroundColor: graphData?.length > 0 ? "#3b62f6" : "rgba(54,162,235,0.1)",
 				borderColor: "#1D1327",
 				pointBorderColor: "red",
 				fill: true,

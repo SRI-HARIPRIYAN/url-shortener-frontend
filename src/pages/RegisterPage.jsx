@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import TextField from "../components/TextField";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import axios from "../api/api.js";
 import { registerUser } from "../api/services.js";
 import toast from "react-hot-toast";
 

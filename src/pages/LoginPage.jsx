@@ -13,7 +13,7 @@ const LoginPage = () => {
 		register,
 		handleSubmit,
 		reset,
-		formState: { errors, isSubmitting },
+		formState: { errors },
 	} = useForm({
 		defaultValues: {
 			username: "",
@@ -22,7 +22,7 @@ const LoginPage = () => {
 		mode: "onTouched",
 	});
 
-	const { mutate } = useMutation({
+	const { mutate, isPending } = useMutation({
 		mutationFn: loginUser,
 		onSuccess: (response) => {
 			reset();
@@ -74,9 +74,9 @@ const LoginPage = () => {
 				<button
 					className=" bg-gradient-to-r from-blue-500 to-pink-500 rounded-md  text-white py-1.5 mx-2 hover:bg-gradient-to-r hover:from-blue-700 hover:to-pink-700 transition-all duration-200"
 					type="submit"
-					// disabled={isSubmitting}
+					// disabled}
 				>
-					{isSubmitting ? "Logging in..." : "Login"}
+					{isPending ? "Logging in..." : "Login"}
 				</button>
 
 				<p className=" text-sm text-center mt-3">

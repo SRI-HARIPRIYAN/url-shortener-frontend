@@ -1,21 +1,15 @@
-const TextField = ({
-	label,
-	id,
-	type,
-	errors,
-	register,
-	required,
-	message,
-	min,
-	placeholder,
-}) => {
+const TextField = ({ label, id, type, errors, register, required, message, min, placeholder }) => {
 	return (
 		<div className=" flex flex-col gap-2">
-			<label htmlFor={id}>{label}</label>
+			<label className="font-semibold" htmlFor={id}>
+				{label}
+			</label>
 			<input
 				type={type}
 				id={id}
-				className={` w-full border-2 ${errors[id]?.message ?"border-red-400":"border-gray-400"} rounded-md p-2 `}
+				className={` w-full border-2 ${
+					errors[id]?.message ? "border-red-400" : "border-gray-400"
+				} rounded-md p-2 `}
 				placeholder={placeholder}
 				{...register(id, {
 					required: { value: required, message },
