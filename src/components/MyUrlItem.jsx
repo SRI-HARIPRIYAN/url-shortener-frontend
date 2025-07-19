@@ -7,6 +7,9 @@ import { HiExternalLink } from "react-icons/hi";
 import { copyToClipBoard } from "../utils/utils";
 import { MdOutlineAnalytics } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
+import Graph from "./Graph";
+import { useFetchUrlAnalytics } from "../useQuery/queryApi";
+import { useTokenContext } from "../context/tokenContext";
 const MyUrlItem = ({
 	id,
 	shortUrl,
@@ -19,16 +22,17 @@ const MyUrlItem = ({
 	setCopied,
 }) => {
 	const [analyticsToggle, setAnalyticsToggle] = useState(false);
+	const { token } = useTokenContext();
+	const subDomain = import.meta.env.VITE_REACT_SUBDOMAIN;
 
-	const subDomain = import.meta.env.VITE_REACT_SUBDOMAIN.replace(/^https?:\/\//, "");
-
+	const { data, refetch, isFetching } = useFetchUrlAnalytics(token, shortUrl);
 	const handleCopyClick = () => {
 		copyToClipBoard(subDomain, shortUrl, setCopied);
 	};
-
 	const handleAnalyticsToggle = () => {
 		if (!analyticsToggle) {
 			setSelected(shortUrl);
+			refetch();
 		}
 		setAnalyticsToggle(!analyticsToggle);
 	};
@@ -43,9 +47,8 @@ const MyUrlItem = ({
 			>
 				<div className=" text-sm flex flex-col gap-2">
 					<p className="font-semibold text-blue-500">
-						{subDomain + shortUrl}
-
-						<a href={subDomain + shortUrl} target="_blank" className="text-lg ml-1">
+						<a href={`${subDomain}${shortUrl}`} target="_blank" className="text-lg ml-1">
+							{subDomain + shortUrl}
 							<HiExternalLink className="inline" />
 						</a>
 					</p>
@@ -98,8 +101,9 @@ const MyUrlItem = ({
 							analyticsToggle ? "flex" : "hidden"
 						} h-[300px] border-[1px] border-blue-400 mx-3 rounded-md `}
 					>
-						<div>
+						<div className="w-full">
 							<p>The drop down</p>
+							<Graph graphData={data} />
 						</div>
 					</div>
 				}

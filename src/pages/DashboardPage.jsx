@@ -2,19 +2,19 @@ import { useState } from "react";
 import UrlInputModal from "../components/dashboard/UrlInputModel";
 import Graph from "../components/Graph";
 import { useTokenContext } from "../context/tokenContext";
-import { useFetchTotalClicks,useFetchMyShortUrls } from "../useQuery/queryApi";
+import { useFetchTotalClicks, useFetchMyShortUrls } from "../useQuery/queryApi";
 import MyUrlsShorten from "../components/MyUrlsShorten";
 const DashboardPage = () => {
 	const { token } = useTokenContext();
 	const { data: totalClicks } = useFetchTotalClicks(token, onError);
-	const { data, isPending ,refetch} = useFetchMyShortUrls(token,onError);
+	const { data, isPending, refetch } = useFetchMyShortUrls(token, onError);
 	const [modalOpen, setModalOpen] = useState(false);
 	function onError() {
 		console.error("error");
 	}
 
 	return (
-		<div className="w-full min-h-[calc(100vh-36px)]">
+		<div className="w-full min-h-[calc(100vh-36px)] lg:px-10">
 			<>
 				<div className="relative p-8 h-96">
 					{totalClicks == undefined || totalClicks?.length == 0 ? (
@@ -37,7 +37,7 @@ const DashboardPage = () => {
 				</button>
 			</div>
 			<UrlInputModal modalOpen={modalOpen} setModalOpen={setModalOpen} refetch={refetch} />
-			<MyUrlsShorten data={data} isPending={isPending}/>
+			<MyUrlsShorten data={data} isPending={isPending} />
 		</div>
 	);
 };

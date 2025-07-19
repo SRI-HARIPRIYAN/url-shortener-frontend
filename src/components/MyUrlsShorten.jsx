@@ -6,10 +6,17 @@ const MyUrlsShorten = ({ data, isPending }) => {
 	const [selected, setSelected] = useState("");
 	const [copied, setCopied] = useState("");
 	return (
-		<div>
+		<div className=" lg:px-20 mt-10">
 			{isPending && <UrlListSkeleton />}
 			{data?.map((item) => (
-				<MyUrlItem key={item.id} {...item} selected={selected} setSelected={setSelected} copied={copied} setCopied={setCopied} />
+				<MyUrlItem
+					key={item.id}
+					{...item}
+					selected={selected}
+					setSelected={setSelected}
+					copied={copied}
+					setCopied={setCopied}
+				/>
 			))}
 		</div>
 	);
